@@ -1,6 +1,5 @@
-/* ==========================================
-   1. GLOBAL VARIABLES & THEME SETUP
-   ==========================================
+/* 1. GLOBAL VARIABLES & THEME SETUP
+
    CSS Variables (Custom Properties) allow you to store site-wide design 
    tokens (colors, fonts, borders) in one place for easy updating. */
 :root {
@@ -51,9 +50,7 @@ a {
 }
 
 
-/* ==========================================
-   2. NAVIGATION BAR
-   ========================================== */
+/* 2. NAVIGATION BAR */
 .nav-strip {
   border-bottom: 1px solid var(--hair);
 }
@@ -87,9 +84,7 @@ a {
 }
 
 
-/* ==========================================
-   3. HERO SECTION & BUTTONS
-   ========================================== */
+/* 3. HERO SECTION & BUTTONS */
 .hero {
   padding: 5.5rem 0 4.5rem;
   position: relative;
@@ -159,9 +154,7 @@ a {
 }
 
 
-/* ==========================================
-   4. CONTACT SHEET (Hero Visual Frames)
-   ========================================== */
+/* 4. CONTACT SHEET (Hero Visual Frames) */
 .contact-sheet {
   background: var(--ink-soft);
   border: 1px solid var(--hair);
@@ -248,9 +241,7 @@ a {
 }
 
 
-/* ==========================================
-   5. GENERAL SECTION HEADERS
-   ========================================== */
+/* 5. GENERAL SECTION HEADERS */
 .section {
   padding: 4.5rem 0;
   border-top: 1px solid var(--hair);
@@ -268,9 +259,7 @@ a {
 }
 
 
-/* ==========================================
-   6. OBJECTIVES SECTION (Why Rows)
-   ========================================== */
+/* 6. OBJECTIVES SECTION (Why Rows) */
 .why-row {
   border-top: 1px solid var(--hair);
   padding: 1.6rem 0;
@@ -302,9 +291,7 @@ a {
 }
 
 
-/* ==========================================
-   7. FUNCTIONALITY COLUMNS (Cards)
-   ========================================== */
+/* 7. FUNCTIONALITY COLUMNS (Cards) */
 .func-card {
   border: 1px solid var(--hair);
   padding: 1.8rem 1.6rem;
@@ -335,9 +322,7 @@ a {
 }
 
 
-/* ==========================================
-   8. TARGET CLIENT SECTION
-   ========================================== */
+/* 8. TARGET CLIENT SECTION */
 .target-band {
   background: var(--ink-soft);
 }
@@ -369,9 +354,7 @@ a {
 }
 
 
-/* ==========================================
-   9. CALL TO ACTION & FOOTER
-   ========================================== */
+/* 9. CALL TO ACTION & FOOTER */
 .cta-band {
   text-align: center;
   padding: 5rem 0;
@@ -389,9 +372,7 @@ footer {
 }
 
 
-/* ==========================================
-   10. MEDIA QUERIES & ACCESSIBILITY
-   ========================================== */
+/* 10. MEDIA QUERIES & ACCESSIBILITY */
 
 /* Mobile Layout Responsive Adjustments (Under 768px) */
 @media (max-width: 767.98px) {
