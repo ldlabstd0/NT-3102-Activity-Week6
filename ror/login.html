@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In — LaughTales by SPP</title>
+
+  <!-- Load external Google Fonts for custom typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Link to the main external CSS stylesheet -->
+  <link rel="stylesheet" href="loginStyle.css">
+</head>
+<body>
+
+  <!-- ================================================================= -->
+  <!-- 1. DECORATIVE BACKGROUND ELEMENTS                                  -->
+  <!-- ================================================================= -->
+  
+  <!-- Full-screen backdrop overlay for color and texture gradients -->
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <!-- Decorative SVG camera lens aperture graphic -->
+  <svg class="aperture" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Single aperture blade shape reused multiple times below -->
+      <path id="blade" d="M200,200 L235,36 L270,52 Z" fill="var(--accent)" />
+    </defs>
+
+    <!-- Inner guide circles for visual detail -->
+    <g fill="none" stroke="var(--accent)" stroke-width="1">
+      <circle cx="200" cy="200" r="188" opacity="0.22" />
+      <circle cx="200" cy="200" r="150" opacity="0.16" />
+      <circle cx="200" cy="200" r="112" opacity="0.12" />
+    </g>
+
+    <!-- 8 blades rotated around the central point (200, 200) -->
+    <g opacity="0.16">
+      <use href="#blade" transform="rotate(0 200 200)" />
+      <use href="#blade" transform="rotate(45 200 200)" />
+      <use href="#blade" transform="rotate(90 200 200)" />
+      <use href="#blade" transform="rotate(135 200 200)" />
+      <use href="#blade" transform="rotate(180 200 200)" />
+      <use href="#blade" transform="rotate(225 200 200)" />
+      <use href="#blade" transform="rotate(270 200 200)" />
+      <use href="#blade" transform="rotate(315 200 200)" />
+    </g>
+  </svg>
+
+  <!-- ================================================================= -->
+  <!-- 2. MAIN CONTENT AREA                                              -->
+  <!-- ================================================================= -->
+  <div class="stage">
+
+    <!-- Website Logo / Header text block -->
+    <div class="brand-block">
+      <div class="brand">
+        <span class="brand__dot"></span> LaughTales by SPP
+      </div>
+      <p class="tagline">Sign in to manage sessions, bookings and galleries in one place.</p>
+    </div>
+
+    <!-- Main login card component -->
+    <main class="card" role="main" aria-labelledby="login-heading">
+      <h1 id="login-heading">Welcome back!</h1>
+      <p class="card__sub">Log in to check your booking, payment status and finished photos.</p>
+
+      <!-- Alert box: displays lockout dynamic messages or authentication errors -->
+      <div id="loginAlert" class="alert-box d-none" role="alert"></div>
+
+      <!-- Login Form -->
+      <form id="loginForm" action="#" method="post" novalidate>
+
+        <!-- Input Field: Username / Email -->
+        <div class="field">
+          <label for="identifier">Email or username</label>
+          <div class="input-wrap">
+            <input
+              id="identifier"
+              name="identifier"
+              type="text"
+              placeholder="Email@example.com"
+              autocomplete="username"
+              required
+            >
+            <!-- Field icon (User vector graphic) -->
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Input Field: Password -->
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            >
+            <!-- Field icon (Lock vector graphic) -->
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="11" width="14" height="9" rx="2" />
+                <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Options Row: Checkbox & Password Reset -->
+        <div class="row-between">
+          <label class="remember">
+            <input type="checkbox" name="remember">
+            Remember me
+          </label>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <!-- Form Submission Button -->
+        <button type="submit" class="btn">Log in</button>
+      </form>
+
+      <!-- Page navigation / helper links -->
+      <p class="switch">New to LaughTales? <a href="register.html">Create an account</a></p>
+      <p class="demo-hint">Demo login — username: <strong>Admin</strong>, password: <strong>00000000</strong></p>
+    </main>
+
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- 3. JAVASCRIPT LIBRARIES & LOGIC                                   -->
+  <!-- ================================================================= -->
+  
+  <!-- External Libraries: jQuery & jQuery Validation Plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.22.1/jquery.validate.min.js"></script>
+
+  <script>
+    // Wait until the HTML document is fully loaded before running JavaScript
+    $(document).ready(function () {
+
+      // --- CONFIGURATION CONSTANTS ---
+      var STATIC_USERNAME = "Admin";
+      var STATIC_PASSWORD = "00000000";
+      var MAX_ATTEMPTS = 3;
+      var LOCKOUT_SECONDS = 30;
+
+      // Storage keys used to persist login status in browser local storage
+      var ATTEMPTS_KEY = "loginFailedAttempts";
+      var LOCKOUT_UNTIL_KEY = "loginLockoutUntil";
+
+      // Cache DOM elements in variables for faster access
+      var $identifier = $("#identifier");
+      var $password = $("#password");
+      var $submitBtn = $("#loginForm button[type='submit']");
+      var $alert = $("#loginAlert");
+      var countdownTimer = null;
+
+      /**
+       * Helper function to enable/disable input elements in the form
+       * @param {boolean} disabled - True to disable fields, false to enable
+       */
+      function setFormDisabled(disabled) {
+        $identifier.prop("disabled", disabled);
+        $password.prop("disabled", disabled);
+        $submitBtn.prop("disabled", disabled);
+      }
+
+      /**
+       * Clears any active lockout period and restores normal form operation
+       */
+      function clearLockout() {
+        localStorage.removeItem(ATTEMPTS_KEY);
+        localStorage.removeItem(LOCKOUT_UNTIL_KEY);
+
+        if (countdownTimer) {
+          clearInterval(countdownTimer);
+          countdownTimer = null;
+        }
+
+        setFormDisabled(false);
+        $alert.addClass("d-none").text("");
+      }
+
+      /**
+       * Initiates a timer that disables the form for a specified duration
+       * @param {number} secondsRemaining - Duration of lockout in seconds
+       */
+      function startLockout(secondsRemaining) {
+        setFormDisabled(true);
+
+        function render(seconds) {
+          $alert
+            .removeClass("d-none")
+            .text("Too many failed attempts. Please wait " + seconds + "s before trying again.");
+        }
+
+        render(secondsRemaining);
+
+        if (countdownTimer) {
+          clearInterval(countdownTimer);
+        }
+
+        // Update remaining time every 1000ms (1 second)
+        countdownTimer = setInterval(function () {
+          secondsRemaining -= 1;
+          if (secondsRemaining <= 0) {
+            clearLockout();
+          } else {
+            render(secondsRemaining);
+          }
+        }, 1000);
+      }
+
+      // Check if user refreshed the browser while still locked out
+      (function checkExistingLockout() {
+        var lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_UNTIL_KEY) || "0", 10);
+        var msRemaining = lockoutUntil - Date.now();
+        if (msRemaining > 0) {
+          startLockout(Math.ceil(msRemaining / 1000));
+        }
+      })();
+
+      // --- FORM VALIDATION AND SUBMISSION ---
+      $("#loginForm").validate({
+        // Set validation rules for input fields
+        rules: {
+          identifier: {
+            required: true,
+            minlength: 3
+          },
+          password: {
+            required: true,
+            minlength: 5
+          }
+        },
+
+        // Custom error messages for failed validation rules
+        messages: {
+          identifier: {
+            required: "Please enter your username or email.",
+            minlength: "Must be at least 3 characters long."
+          },
+          password: {
+            required: "Please enter your password.",
+            minlength: "Password must be at least 5 characters long."
+          }
+        },
+
+        // DOM element formatting for validation error messages
+        errorElement: "span",
+        errorClass: "error-msg",
+        highlight: function (element) {
+          $(element).addClass("input-error");
+        },
+        unhighlight: function (element) {
+          $(element).removeClass("input-error");
+        },
+        errorPlacement: function (error, element) {
+          error.insertAfter(element.closest(".input-wrap"));
+        },
+
+        // Runs when form fields pass all validation checks
+        submitHandler: function (form) {
+          // Prevent submission if currently in lockout mode
+          var lockoutUntil = parseInt(localStorage.getItem(LOCKOUT_UNTIL_KEY) || "0", 10);
+          if (lockoutUntil > Date.now()) {
+            return false;
+          }
+
+          var username = $identifier.val().trim();
+          var password = $password.val();
+
+          // Check entered credentials against demo constants
+          if (username === STATIC_USERNAME && password === STATIC_PASSWORD) {
+            // SUCCESSFUL LOGIN: Clear failed attempt history and redirect to dashboard
+            localStorage.removeItem(ATTEMPTS_KEY);
+            localStorage.removeItem(LOCKOUT_UNTIL_KEY);
+            sessionStorage.setItem("loggedInUser", username);
+            $alert.addClass("d-none").text("");
+            window.location.href = "dashboard.html";
+          } else {
+            // FAILED LOGIN: Increment failed attempts counter
+            var attempts = parseInt(localStorage.getItem(ATTEMPTS_KEY) || "0", 10) + 1;
+
+            if (attempts >= MAX_ATTEMPTS) {
+              // Trigger temporary account lockout after reaching max attempts
+              localStorage.setItem(ATTEMPTS_KEY, "0");
+              var lockUntil = Date.now() + LOCKOUT_SECONDS * 1000;
+              localStorage.setItem(LOCKOUT_UNTIL_KEY, String(lockUntil));
+              startLockout(LOCKOUT_SECONDS);
+            } else {
+              // Show remaining attempts count
+              localStorage.setItem(ATTEMPTS_KEY, String(attempts));
+              var remaining = MAX_ATTEMPTS - attempts;
+              $alert
+                .removeClass("d-none")
+                .text(
+                  "Incorrect username or password. " +
+                  remaining + " attempt" + (remaining === 1 ? "" : "s") +
+                  " left before a 30s lockout."
+                );
+            }
+          }
+
+          // Return false to prevent actual HTTP page refresh on submit
+          return false;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

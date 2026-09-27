@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — LaughTales by SPP</title>
+
+  <!-- Google Fonts: Preconnects and downloads custom typography (Fraunces for display, Inter for body body copy) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- External Stylesheet: Links to custom CSS styling rules -->
+  <link rel="stylesheet" href="registerStyle.css">
+</head>
+<body>
+
+  <!-- Background decorative gradient layer (aria-hidden tells screen readers to ignore visual decoration) -->
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <!-- Decorative spinning camera aperture SVG illustration -->
+  <svg class="aperture" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Reusable vector path defining a single camera blade shape -->
+      <path id="blade" d="M200,200 L235,36 L270,52 Z" fill="var(--accent)"/>
+    </defs>
+    <!-- Circular guide rings inside the SVG graphic -->
+    <g fill="none" stroke="var(--accent)" stroke-width="1">
+      <circle cx="200" cy="200" r="188" opacity="0.22"/>
+      <circle cx="200" cy="200" r="150" opacity="0.16"/>
+      <circle cx="200" cy="200" r="112" opacity="0.12"/>
+    </g>
+    <!-- Duplicates and rotates the #blade template 8 times around the center point (200, 200) -->
+    <g opacity="0.16">
+      <use href="#blade" transform="rotate(0 200 200)"/>
+      <use href="#blade" transform="rotate(45 200 200)"/>
+      <use href="#blade" transform="rotate(90 200 200)"/>
+      <use href="#blade" transform="rotate(135 200 200)"/>
+      <use href="#blade" transform="rotate(180 200 200)"/>
+      <use href="#blade" transform="rotate(225 200 200)"/>
+      <use href="#blade" transform="rotate(270 200 200)"/>
+      <use href="#blade" transform="rotate(315 200 200)"/>
+    </g>
+  </svg>
+
+  <!-- Main page container -->
+  <div class="stage">
+
+    <!-- Brand Header / Tagline section on the left side -->
+    <div class="brand-block">
+      <div class="brand">
+        <span class="brand__dot"></span> LaughTales by SPP
+      </div>
+      <p class="tagline">Book sessions, track payments and download your gallery — all in one place.</p>
+    </div>
+
+    <!-- Registration Card: Primary content area -->
+    <main class="card" role="main" aria-labelledby="register-heading">
+      <h1 id="register-heading">Create your account</h1>
+      <p class="card__sub">Set up your profile once, then book and manage every future session.</p>
+
+      <!-- Success feedback banner: Hidden by default (d-none), displayed by JavaScript after successful form validation -->
+      <div id="registerSuccess" class="alert-box success d-none" role="alert">
+        Account created! Redirecting you to the login page…
+      </div>
+
+      <!-- Registration Form: novalidate disables standard browser validation so jQuery handle it -->
+      <form id="registerForm" action="#" method="post" novalidate>
+
+        <!-- Full Name Field -->
+        <div class="field">
+          <label for="fullname">Full name</label>
+          <div class="input-wrap">
+            <input id="fullname" name="fullname" type="text" placeholder="Your Full Name" autocomplete="name" required>
+            <!-- Field Icon: User icon -->
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Email Address Field -->
+        <div class="field">
+          <label for="email">Email address</label>
+          <div class="input-wrap">
+            <input id="email" name="email" type="email" placeholder="Email@example.com" autocomplete="email" required>
+            <!-- Field Icon: Envelope / Mail icon -->
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3.5" y="5.5" width="17" height="13" rx="2.2"/>
+                <path d="M4.5 7 12 12.5 19.5 7"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input id="password" name="password" type="password" placeholder="At least 8 characters" autocomplete="new-password" minlength="8" required>
+            <!-- Field Icon: Lock icon -->
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="11" width="14" height="9" rx="2"/>
+                <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="field">
+          <label for="confirm">Confirm password</label>
+          <div class="input-wrap">
+            <input id="confirm" name="confirm" type="password" placeholder="Re-enter your password" autocomplete="new-password" minlength="8" required>
+            <!-- Field Icon: Shield with checkmark icon -->
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l7 3v5c0 4.6-3 8.3-7 10-4-1.7-7-5.4-7-10V6Z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Terms & Conditions Checkbox -->
+        <label class="terms">
+          <input type="checkbox" id="agree" name="agree" required>
+          <span>I agree to the <u>Terms of Service</u> and <u>Privacy Policy</u></span>
+        </label>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn">Create account</button>
+
+      </form>
+
+      <!-- Navigation link to login page -->
+      <p class="switch">Already have an account? <a href="login.html">Log in</a></p>
+
+    </main>
+
+  </div>
+
+  <!-- JavaScript Libraries: Includes jQuery core library and jQuery Validation plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.22.1/jquery.validate.min.js"></script>
+
+  <!-- Custom Page Scripts & Form Logic -->
+  <script>
+    // Wait until the document DOM is ready before attaching handlers
+    $(document).ready(function () {
+
+      // Click listener for password visibility toggling (supports both password inputs)
+      $(".toggle-password").on("click", function () {
+        var $btn = $(this);
+        var $input = $("#" + $btn.data("target")); // Find the input targeting this button
+        var isHidden = $input.attr("type") === "password";
+
+        // Toggle input type between hidden ("password") and visible text ("text")
+        $input.attr("type", isHidden ? "text" : "password");
+        $btn.find(".icon-eye").toggleClass("d-none");
+        $btn.find(".icon-eye-off").toggleClass("d-none");
+        $btn.attr("aria-label", isHidden ? "Hide password" : "Show password");
+      });
+
+      // Add custom validation method: Ensures the terms checkbox is checked before allowing submit
+      $.validator.addMethod("mustBeChecked", function (value, element) {
+        return $(element).is(":checked");
+      }, "You must agree to the Terms of Service and Privacy Policy.");
+
+      // Configure jQuery Validation plugin on the registration form
+      $("#registerForm").validate({
+        // Define input rules
+        rules: {
+          fullname: {
+            required: true,
+            minlength: 2
+          },
+          email: {
+            required: true,
+            email: true
+          },
+          password: {
+            required: true,
+            minlength: 8
+          },
+          confirm: {
+            required: true,
+            minlength: 8,
+            equalTo: "#password" // Ensures confirm field matches the main password input value
+          },
+          agree: {
+            mustBeChecked: true // Uses the custom validation rule defined above
+          }
+        },
+        // Custom error messages printed when validation fails
+        messages: {
+          fullname: {
+            required: "Please enter your full name.",
+            minlength: "Name must be at least 2 characters long."
+          },
+          email: {
+            required: "Please enter your email address.",
+            email: "Please enter a valid email address."
+          },
+          password: {
+            required: "Please create a password.",
+            minlength: "Password must be at least 8 characters long."
+          },
+          confirm: {
+            required: "Please confirm your password.",
+            minlength: "Password must be at least 8 characters long.",
+            equalTo: "Passwords do not match. Please re-enter."
+          }
+        },
+        // Styling and placement rules for error messages
+        errorElement: "span",
+        errorClass: "error-msg",
+        highlight: function (element) {
+          $(element).addClass("input-error"); // Adds error CSS class on invalid input
+        },
+        unhighlight: function (element) {
+          $(element).removeClass("input-error"); // Removes error CSS class when input becomes valid
+        },
+        errorPlacement: function (error, element) {
+          // Special placement logic for checkbox vs standard text fields
+          if (element.attr("type") === "checkbox") {
+            error.insertAfter(element.closest(".terms"));
+          } else {
+            error.insertAfter(element.closest(".input-wrap"));
+          }
+        },
+        // Executed when form passes all validation rules
+        submitHandler: function (form) {
+          // Show successful feedback message banner
+          $("#registerSuccess").removeClass("d-none");
+          form.reset(); // Clear form fields
+          window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll back to top to view success banner
+          
+          // Redirect user to the login page after a 1.6 second pause
+          setTimeout(function () {
+            window.location.href = "login.html";
+          }, 1600);
+          
+          return false; // Prevent form default submission to avoid browser page reload
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
