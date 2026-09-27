@@ -1,6 +1,5 @@
-/* ==========================================================================
-   1. CSS VARIABLES (DESIGN SYSTEM)
-   ==========================================================================
+/* 1. CSS VARIABLES (DESIGN SYSTEM)
+
    CSS Variables (Custom Properties) store reusable design values like colors 
    and radiuses in one place. Change them here, and they update across the site. */
 :root {
@@ -26,9 +25,7 @@
   --radius-pill: 999px;  /* Capsule shape for full-round buttons */
 }
 
-/* ==========================================================================
-   2. GLOBAL RESETS & BASE STYLES
-   ========================================================================== */
+/* 2. GLOBAL RESETS & BASE STYLES */
 
 /* Universal Box Sizing: Includes padding and borders in total element dimensions,
    preventing elements from breaking layouts when padding is added. */
@@ -64,9 +61,7 @@ input:focus-visible,
 }
 
 
-/* ==========================================================================
-   3. BACKGROUND & DECORATIVE GRAPHICS
-   ========================================================================== */
+/* 3. BACKGROUND & DECORATIVE GRAPHICS */
 
 /* Full-screen fixed background container */
 .backdrop {
@@ -117,9 +112,7 @@ input:focus-visible,
 }
 
 
-/* ==========================================================================
-   4. LAYOUT & BRANDING BLOCK
-   ========================================================================== */
+/* 4. LAYOUT & BRANDING BLOCK */
 
 /* Wrapper layout that holds the brand block and the interactive card */
 .stage {
@@ -166,9 +159,7 @@ input:focus-visible,
 }
 
 
-/* ==========================================================================
-   5. GLASSMORPHISM FORM CARD
-   ========================================================================== */
+/* 5. GLASSMORPHISM FORM CARD */
 
 /* Main translucent card styling */
 .card {
@@ -231,9 +222,7 @@ input:focus-visible,
 }
 
 
-/* ==========================================================================
-   6. FORM INPUTS & INTERACTIVE CONTROLS
-   ========================================================================== */
+/* 6. FORM INPUTS & INTERACTIVE CONTROLS */
 
 form {
   display: flex;
@@ -402,9 +391,7 @@ form {
 }
 
 
-/* ==========================================================================
-   7. RESPONSIVE MEDIA QUERIES
-   ========================================================================== */
+/* 7. RESPONSIVE MEDIA QUERIES */
 
 /* Desktop Screens (900px and up) */
 @media (min-width: 900px) {
