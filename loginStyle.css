@@ -1,6 +1,5 @@
-/* ==========================================
-   1. GLOBAL VARIABLES & COLOR PALETTE
-   ==========================================
+/* 1. GLOBAL VARIABLES & COLOR PALETTE
+
    CSS Variables (Custom Properties) allow you to store values 
    like colors and sizes in one place so you can reuse them easily. */
 :root {
@@ -25,9 +24,7 @@
   --radius-pill: 999px;  /* Pill shape for buttons */
 }
 
-/* ==========================================
-   2. GLOBAL RESETS & BASE STYLES
-   ========================================== */
+/* 2. GLOBAL RESETS & BASE STYLES */
 
 /* Universal Box Sizing: Ensures padding and borders are included 
    in the element's total width and height (prevents layout breaking) */
@@ -63,9 +60,7 @@ input:focus-visible,
 }
 
 
-/* ==========================================
-   3. BACKDROP & ANIMATED APERTURE GRAPHIC
-   ========================================== */
+/* 3. BACKDROP & ANIMATED APERTURE GRAPHIC */
 
 /* Full-screen fixed background container */
 .backdrop {
@@ -116,9 +111,7 @@ input:focus-visible,
 }
 
 
-/* ==========================================
-   4. LAYOUT STAGE & BRANDING BLOCK
-   ========================================== */
+/* 4. LAYOUT STAGE & BRANDING BLOCK */
 
 /* Main layout wrapper holding the branding and the form card */
 .stage {
@@ -165,9 +158,7 @@ input:focus-visible,
 }
 
 
-/* ==========================================
-   5. GLASSMORPHISM LOGIN CARD
-   ========================================== */
+/* 5. GLASSMORPHISM LOGIN CARD */
 
 /* Frosted glass container */
 .card {
@@ -202,9 +193,7 @@ input:focus-visible,
 }
 
 
-/* ==========================================
-   6. FORM INPUTS & FIELD STYLING
-   ========================================== */
+/* 6. FORM INPUTS & FIELD STYLING */
 
 form {
   display: flex;
@@ -322,9 +311,7 @@ form {
 }
 
 
-/* ==========================================
-   7. CHECKBOX & BUTTON CONTROLS
-   ========================================== */
+/* 7. CHECKBOX & BUTTON CONTROLS */
 
 /* Flex row used for "Remember Me" and "Forgot Password" link */
 .row-between {
@@ -400,9 +387,7 @@ form {
 }
 
 
-/* ==========================================
-   8. MEDIA QUERIES & RESPONSIVE BREAKPOINTS
-   ========================================== */
+/* 8. MEDIA QUERIES & RESPONSIVE BREAKPOINTS */
 
 /* Desktop Layout (900px and wide screens) */
 @media (min-width: 900px) {
