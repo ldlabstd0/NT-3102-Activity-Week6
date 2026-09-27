@@ -283,12 +283,12 @@
 
           // Check entered credentials against demo constants
           if (username === STATIC_USERNAME && password === STATIC_PASSWORD) {
-            // SUCCESSFUL LOGIN: Clear failed attempt history and redirect to dashboard
+            // SUCCESSFUL LOGIN: Clear failed attempt history and redirect to index
             localStorage.removeItem(ATTEMPTS_KEY);
             localStorage.removeItem(LOCKOUT_UNTIL_KEY);
             sessionStorage.setItem("loggedInUser", username);
             $alert.addClass("d-none").text("");
-            window.location.href = "dashboard.html";
+            window.location.href = "index.html";
           } else {
             // FAILED LOGIN: Increment failed attempts counter
             var attempts = parseInt(localStorage.getItem(ATTEMPTS_KEY) || "0", 10) + 1;
